@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +41,21 @@ public class GameController {
                 .numOfCard(Integer.parseInt(data.get("cardValue")))
                 .build();
         cardService.saveCard(card);
+    }
+
+    @GetMapping("/get-result-by-task")
+    public Map<String, Integer> getResult(@RequestBody Map<String, String> data){
+        Long id = Long.parseLong(data.get("taskId"));
+        Map<String, Integer> result = new HashMap<>();
+        List<Card> allCardOfTask = cardService.getAllCardOfTask(id);
+        int sum = 0;
+        for (Card card: allCardOfTask) {
+            result.put(card.getUser().getName(), card.getNumOfCard());
+            sum += card.getNumOfCard();
+        }
+        int average = sum/allCardOfTask.size();
+        result.put("AVERAGE",average);
+        return result;
     }
 
 

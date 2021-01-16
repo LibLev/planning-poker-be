@@ -21,10 +21,7 @@ public class Card {
     private Long id;
     private int numOfCard;
 
-    @OneToOne(mappedBy = "card", cascade = {
-            CascadeType.MERGE,
-            CascadeType.REFRESH
-    }, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Task task;
 
     @ManyToOne (cascade = CascadeType.MERGE)

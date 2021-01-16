@@ -1,12 +1,12 @@
 package levente.libardi.abris.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -23,6 +23,13 @@ public class Task {
     private String nameOfTask;
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Card card;
+    @OneToMany(mappedBy = "user",cascade = {
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+    }, fetch = FetchType.EAGER)
+    @Singular
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
+    private List<Card> cards = new ArrayList<>();
 }
