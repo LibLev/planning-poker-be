@@ -1,13 +1,13 @@
 package levente.libardi.abris.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -23,7 +23,11 @@ public class AppUser {
     @NotEmpty
     private String name;
 
-/*    @OneToOne(cascade = CascadeType.ALL)
-    private Card card;*/
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Singular
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
+    private List<Card> cards = new ArrayList<>();
 
 }

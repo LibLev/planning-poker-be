@@ -20,6 +20,6 @@ public class Task {
     private String nameOfTask;
     private String description;
 
-/*    @OneToOne(cascade = CascadeType.ALL)
-    private Card card;*/
+    @OneToOne(cascade = CascadeType.ALL)
+    private Card card;
 }

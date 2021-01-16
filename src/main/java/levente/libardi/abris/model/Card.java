@@ -21,10 +21,10 @@ public class Card {
     private Long id;
     private int numOfCard;
 
-/*    @OneToOne(mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Task task;
 
-    @OneToOne(mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private User user;*/
+    @ManyToOne (cascade = CascadeType.ALL)
+    private AppUser user;
 
 }
