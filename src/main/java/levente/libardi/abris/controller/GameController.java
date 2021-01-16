@@ -49,7 +49,7 @@ public class GameController {
             result.put(card.getUser().getName(), card.getNumOfCard());
             sum += card.getNumOfCard();
         }
-        int average = sum/allCardOfTask.size();
+        int average = cardService.findClosestFibonacciNumber(sum/allCardOfTask.size());
         result.put("AVERAGE",average);
         return result;
     }
