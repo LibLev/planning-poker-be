@@ -1,23 +1,45 @@
 package levente.libardi.abris.controller;
 
+import levente.libardi.abris.model.AppUser;
+import levente.libardi.abris.model.Card;
 import levente.libardi.abris.model.Task;
+import levente.libardi.abris.service.CardService;
 import levente.libardi.abris.service.TaskService;
+import levente.libardi.abris.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
+@AllArgsConstructor
 public class GameController {
 
-    @Autowired
+    private UserService userService;
     private TaskService taskService;
+    private CardService cardService;
 
     //Show all task
     @GetMapping("/get-all-task")
     public List<Task> getAllTask(){
         return taskService.getAllTask();
+    }
+
+    @PostMapping("/add-value-to-task")
+    public void addValueToTask(@RequestBody Map<String, String> data){
+        AppUser user = userService.getUser(Long.parseLong(data.get("userId")));
+        Task task = taskService.getTask(Long.parseLong(data.get("taskId")));
+        Card card = Card.builder()
+                .task(task)
+                .user(user)
+                .numOfCard(Integer.parseInt(data.get("cardValue")))
+                .build();
+        cardService.saveCard(card);
     }
 
 

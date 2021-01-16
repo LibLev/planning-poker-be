@@ -23,7 +23,10 @@ public class AppUser {
     @NotEmpty
     private String name;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user",cascade = {
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+    }, fetch = FetchType.EAGER)
     @Singular
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

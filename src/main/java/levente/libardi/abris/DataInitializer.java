@@ -8,8 +8,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataInitializer implements CommandLineRunner {
 
-    private TaskRepository tasks;
+    //Create questions
 
+    private TaskRepository tasks;
 
     public DataInitializer(TaskRepository tasks) {
         this.tasks = tasks;
