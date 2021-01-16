@@ -40,9 +40,8 @@ public class GameController {
         cardService.saveCard(card);
     }
 
-    @GetMapping("/get-result-by-task")
-    public Map<String, Integer> getResult(@RequestBody Map<String, String> data){
-        Long id = Long.parseLong(data.get("taskId"));
+    @GetMapping("/get-result-by-task/{id}")
+    public Map<String, Integer> getResult(@PathVariable Long id){
         Map<String, Integer> result = new HashMap<>();
         List<Card> allCardOfTask = cardService.getAllCardOfTask(id);
         int sum = 0;
