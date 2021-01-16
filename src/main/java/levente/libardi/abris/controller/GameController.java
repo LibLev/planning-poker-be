@@ -7,17 +7,14 @@ import levente.libardi.abris.service.CardService;
 import levente.libardi.abris.service.TaskService;
 import levente.libardi.abris.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 @AllArgsConstructor
 public class GameController {
 
@@ -33,7 +30,7 @@ public class GameController {
 
     @PostMapping("/add-value-to-task")
     public void addValueToTask(@RequestBody Map<String, String> data){
-        AppUser user = userService.getUser(Long.parseLong(data.get("userId")));
+        AppUser user = userService.getUser((data.get("name")));
         Task task = taskService.getTask(Long.parseLong(data.get("taskId")));
         Card card = Card.builder()
                 .task(task)
