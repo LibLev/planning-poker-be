@@ -15,11 +15,11 @@ public class Task {
 
     @Id
     @NotNull
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String nameOfTask;
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Card card;
+/*    @OneToOne(cascade = CascadeType.ALL)
+    private Card card;*/
 }

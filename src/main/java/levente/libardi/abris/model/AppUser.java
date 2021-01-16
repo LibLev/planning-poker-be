@@ -7,21 +7,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class User {
+public class AppUser {
 
     @Id
-    @NotNull
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @NotEmpty
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Card card;
+/*    @OneToOne(cascade = CascadeType.ALL)
+    private Card card;*/
 
 }
